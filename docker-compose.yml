@@ -1,0 +1,42 @@
+services:
+  sonarqube-db:
+    image: postgres:15 # You can use other version if you want to.
+    container_name: sonarqube-db
+    environment:
+      - POSTGRES_USER=sonarqube
+      - POSTGRES_PASSWORD=sonarqube
+      - POSTGRES_DB=sonarqube
+    networks:
+      - sonarqube-network
+    ports:
+      - "5433:5432" # 5432 is the default port for PostgreSQL, i'm using 5433 to avoid conflicts with other services
+    volumes:
+        - sonarqube-db:/var/lib/postgresql/data
+
+  sonarqube:
+    image: sonarqube:25.10.0.114319-community # You can switch the version as well if you want, check the official documentation for more info
+    container_name: sonarqube
+    ports:
+      - "9000:9000"
+    environment:
+      - SONAR_JDBC_USERNAME=sonarqube
+      - SONAR_JDBC_PASSWORD=sonarqube
+      - SONAR_JDBC_URL=jdbc:postgresql://sonarqube-db:5432/sonarqube
+    networks:
+      - sonarqube-network
+    depends_on:
+        - sonarqube-db
+    volumes:
+      - sonarqube-data:/opt/sonarqube/data
+      - sonarqube-extensions:/opt/sonarqube/extensions
+      - sonarqube-logs:/opt/sonarqube/logs
+
+volumes:
+  sonarqube-data:
+  sonarqube-extensions:
+  sonarqube-logs:
+  sonarqube-db:
+
+networks:
+  sonarqube-network:
+    driver: bridge
