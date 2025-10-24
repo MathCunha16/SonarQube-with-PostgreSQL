@@ -4,6 +4,9 @@ This repository provides an evergreen, persistent Docker Compose setup to run th
 
 This configuration is designed for developers who want a reliable, local SonarQube instance. It is "evergreen," meaning it uses floating tags (like `community` and `latest`) to pull the newest compatible images on first setup.
 
+> **💡 Need Multi-Branch Analysis?**  
+> If you need to analyze multiple branches and pull requests, check out the [SonarQube with Branch Plugin](https://github.com/MathCunha16/docker-compose-sonarqube-branch-plugin-with-postgres) version of this setup, which includes the Community Branch Plugin for free multi-branch support.
+
 ## Features
 
 * **Stable Database:** Uses a dedicated PostgreSQL database, as recommended by SonarSource for persistent data storage.
@@ -104,6 +107,23 @@ This error can happen if you `docker-compose pull` after a long time. SonarQube 
 
 ---
 
+## Related Projects
+
+### SonarQube with Community Branch Plugin
+If you need to analyze multiple branches and pull requests (features typically only available in commercial editions), check out this enhanced version:
+
+**[docker-compose-sonarqube-branch-plugin-with-postgres](https://github.com/MathCunha16/docker-compose-sonarqube-branch-plugin-with-postgres)**
+
+This setup includes the [SonarQube Community Branch Plugin](https://github.com/mc1arke/sonarqube-community-branch-plugin), which adds:
+- ✅ Multi-branch analysis
+- ✅ Pull request decoration
+- ✅ Branch comparison
+- ✅ CI/CD integration for branches
+
+Perfect for teams working with feature branches and pull request workflows!
+
+---
+
 ## Useful Links & Documentation
 
 * **SonarQube Downloads:** [sonarsource.com/products/sonarqube/downloads/](https://www.sonarsource.com/products/sonarqube/downloads/)
@@ -115,6 +135,7 @@ This error can happen if you `docker-compose pull` after a long time. SonarQube 
 * **SonarQube Installation Docs (Docker):**
   *  [docs.sonarsource.com/sonarqube-server/latest/server-installation/from-docker-image](https://docs.sonarsource.com/sonarqube-server/latest/server-installation/from-docker-image/)
 * **Docker Compose File Reference:** [docs.docker.com/compose/compose-file/](https://docs.docker.com/compose/compose-file/)
+
 ## License
 
 This project is licensed under the **MIT License**.
